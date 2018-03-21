@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Depot</title>
-    <%= csrf_meta_tags %>
-
+    <title>pragprog books online store</title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
   </head>
-
   <body class='<%= controller.controller_name %>'>
-    <%= yield %>
+    <div id="banner">
+      <%= image_tag 'logo.svg', alt: 'the pragmatic bookshelf' %>
+      <% @page_title = controller.controller_name %>
+      <span class="title"><%= @page_title %></span>
+    </div>
+    <div id="columns">
+     
+      <div id="side">
+        <h5><%= @date_loaded %></h5>
+        <ul>
+          <li><a href="http://www...">home</a></li>
+          <li><a href="http://www.../faq">questions</a></li>
+          <li><a href="http://www.../news">news</a></li>
+          <li><a href="http://www.../contact">contact</a></li>
+        </ul>
+      </div>
+      <div id="main">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
+  title: Programming Ruby 1
   description: MyText
   image_url: 1.jpg
   price: 9.99
 
 two:
-  title: MyString
+  title: Programming Ruby 
   description: MyText
   image_url: 1.jpg
   price: 9.99
@@ -18,5 +18,5 @@ ruby:
     Ruby is the fastest growing and most exciting dynamic
     language out there. If you need to get working programs
     delivered fast,you should add ruby to your toolbx.
-  image_url: ruby.png
+  image_url: 2.jpg
   price: 49.50
