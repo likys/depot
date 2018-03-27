@@ -40,7 +40,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     Product.destroy_all
     @product = Product.create! a.as_json(except: ["id"])
     patch product_url(@product), params: { product: { description: @product.description, image_url: @product.image_url, price: @product.price, title: @product.title } }
-    assert_redirected_to product_url(@product)
+    assert_redirected_to products_url(@product)
   end
 
   test "should destroy product" do
@@ -55,7 +55,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Product.count',0) do
       delete product_url(product(:two))
     end
-    assert_redirected_to product_url
+    assert_redirected_to products_url
   end
 
 

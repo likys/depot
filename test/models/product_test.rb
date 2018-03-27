@@ -56,8 +56,19 @@ class ProductTest < ActiveSupport::TestCase
       description:  "yyy",
       price:  1,
       image_url:  "fred.gif")
-    assert product.invalird?
+    assert product.invalid?
     assert_equal [I18n.translate('errors.messages.taken')],
                  product.errors[:title]
   end
+
+  def new_product_with_url(image_url)
+    Product.new(
+      title: "My Book Title",
+      description: "yyy",
+      price: 1,
+      image_url: image_url
+    )
+  end
+  
+  
 end

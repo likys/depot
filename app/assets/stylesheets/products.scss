@@ -5,14 +5,15 @@
 .products {
     table{
       border-collapse: collapse;
+      width: 100%;
     }
     table tr td{
       padding: 5px;
       vertical-align: top;
     }
     .list_image{
-      width:60px;
-      height:70px;
+        width: 200px;
+        height: 200px;
     }
     .list_description{
       width:60%;
@@ -37,6 +38,6 @@
       background: #e0f8f8;
     }
     .list_line_odd{
-      background: #f8b0f8;
+      background: #81b4b4;
     }
   }

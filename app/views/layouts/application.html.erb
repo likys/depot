@@ -15,7 +15,13 @@
     <div id="columns">
      
       <div id="side">
+        <div id="cart">
+            <% if @cart %>
+              <%= render @cart%>
+            <% end %>
+        </div>
         <h5><%= @date_loaded %></h5>
+        <h3><%= pluralize session[:counter], 'time' %></h3>
         <ul>
           <li><a href="http://www...">home</a></li>
           <li><a href="http://www.../faq">questions</a></li>

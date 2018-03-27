@@ -11,7 +11,7 @@ class Product < ApplicationRecord
     private
     def ensure_not_referenced_by_any_line_item
         unless line_items.empty?
-            error.add(:base,'line Items present')
+            errors.add(:base,'line Items present')
             throw :abort
         end
     end
