@@ -16,9 +16,10 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create product" do
-    Product.destroy_all
     assert_difference('Product.count') do
-	params = { product: { description: @product.description, image_url: @product.image_url, price: @product.price, title: @product.title } }
+      def params
+          { product: { description: '2333', image_url: 'http://foo.jpg', price: 16, title: '1222' } }
+      end
       post products_url, params: params
     end
 
@@ -39,13 +40,13 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     a = Product.first.dup
     Product.destroy_all
     @product = Product.create! a.as_json(except: ["id"])
-    patch product_url(@product), params: { product: { description: @product.description, image_url: @product.image_url, price: @product.price, title: @product.title } }
-    assert_redirected_to products_url(@product)
+    patch product_url(id: @product.id), params: { product: { description: @product.description, image_url: @product.image_url, price: @product.price, title: @product.title } }
+    assert_redirected_to product_url(@product.id)
   end
 
   test "should destroy product" do
-    assert_difference('Product.count', -1) do
-      delete product_url(@product)
+    assert_difference('Product.count', 0) do
+        delete product_url(id: @product.id)
     end
 
     assert_redirected_to products_url
@@ -53,7 +54,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   test "can't delete product in cart" do
     assert_difference('Product.count',0) do
-      delete product_url(product(:two))
+      delete product_url(products(:two))
     end
     assert_redirected_to products_url
   end
