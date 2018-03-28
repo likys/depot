@@ -1,8 +1,7 @@
-
+<% unless cart.line_items.empty? %>
 <h2>Your Pragmatic Cart</h2>
     <table>
       <%= render(cart.line_items) %>
-
       <tr class="total_line">
         <td colspan="2">Total</td>
         <td class="total_cell"><%= number_to_currency(cart.total_price) %></td>
@@ -10,3 +9,4 @@
       
     </table>
 <%= button_to 'empty cart', cart, method: :delete,data:{confirm: 'are you sure?'} %>
+<% end %>

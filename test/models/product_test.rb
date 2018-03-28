@@ -20,7 +20,7 @@ class ProductTest < ActiveSupport::TestCase
         product.errors[:price]
 
     product.price = 1
-    assert !product.invalid?
+    assert product.invalid?
   end
   def new_product(image_url)
     Product.new(  
