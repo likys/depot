@@ -1,7 +1,9 @@
 class LineItemsController < ApplicationController
   include CurrentCart
   before_action :set_cart, only: [:create]
-  before_action :set_line_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_line_item, only: [:show, :edit, :update, :destroy, :increment_line_item, :decrease_line_item]
+
+  before_action :current_cart, only: [:increment_line_item, :decrease_line_item, :destroy]
 
   # GET /line_items
   # GET /line_items.json
@@ -34,12 +36,26 @@ class LineItemsController < ApplicationController
       if @line_item.save
         reset_session_counter
         format.html { redirect_to store_index_url }
-        format.js { @current_item=@line_item }
+        format.js { @current_item = @line_item }
         format.json { render :show, status: :created, location: @line_item }
       else
         format.html { render :new }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def increment_line_item
+    @line_item.increment_quantity!
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def decrease_line_item
+    @line_item.decrease_quantity!
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -61,18 +77,21 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1.json
   def destroy
     @line_item.destroy
-    current_cart = session[:cart_id] 
-    
     respond_to do |format|
       format.html { redirect_to store_index_url, notice: 'Line item was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def current_cart
+      @cart = Cart.find(session[:cart_id])
+    end
+
     def set_line_item
-      @line_item = LineItem.find(params[:id])
+      @line_item = LineItem.find(params[:id] || params[:line_item_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

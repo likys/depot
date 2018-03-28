@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :line_items
+  resources :line_items do
+    post :increment_line_item
+    delete :decrease_line_item
+  end
   resources :carts
   root 'store#index',as: 'store_index'
   

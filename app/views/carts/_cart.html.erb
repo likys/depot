@@ -6,7 +6,6 @@
         <td colspan="2">Total</td>
         <td class="total_cell"><%= number_to_currency(cart.total_price) %></td>
       </tr>
-      
     </table>
-<%= button_to 'empty cart', cart, method: :delete,data:{confirm: 'are you sure?'} %>
+<%= button_to 'empty cart', cart, method: :delete, data:{confirm: 'are you sure?'}, remote: true %>
 <% end %>
