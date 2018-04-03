@@ -1,0 +1,37 @@
+<div class="depot_form">
+
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<fieldset>
+ <legend>Enter User Details</legend>
+  <div class="field">
+    <%= form.label :name ,'Name:' %>
+    <%= form.text_field :name, id: :user_name ,size: 40 %>
+  </div>
+   <% if params[:action] == 'edit' || params[:action] == 'update' %> 
+  <div class="field">
+    <%= form.label :current_password, 'Curpwd:' %>
+    <%= form.password_field :current_password, size: 40 %>
+  </div >
+  <% end %>
+  <div class="field">
+      <%= form.label :password %><br />
+      <%= form.password_field :password, size: 40 %>
+    </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+  </field>
+<% end %>
+</div>

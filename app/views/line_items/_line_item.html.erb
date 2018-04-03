@@ -7,6 +7,6 @@
      <td><%= line_item.product.title %></td>
      <td class="item_price"><%= number_to_currency(line_item.total_price )%></td>
      <td><%= link_to "Delete", line_item_path(line_item), method: :delete, data: { confirm: "Are you sure?" }, remote: true %></td>
-     <td><%= link_to "+", line_item_increment_line_item_path(line_item), method: :delete, remote: true, method: :post %></td>
-    <td><%= link_to "-", line_item_decrease_line_item_path(line_item), method: :delete, remote: true, method: :delete %></td>
+     <td><%= link_to "+", line_item_increment_line_item_path(line_item), remote: true, method: :post %></td>
+    <td><%= link_to "-", line_item_decrease_line_item_path(line_item), remote: true, method: :delete %></td>
 </tr>

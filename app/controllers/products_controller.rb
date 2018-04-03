@@ -11,6 +11,12 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    if stale? @product
+      respond_to do |format|
+        format.html
+        format.json { render @product }
+      end
+    end
   end
 
   # GET /products/new
@@ -47,7 +53,7 @@ class ProductsController < ApplicationController
         format.json { render :show, status: :ok, location: @product }
 
         @products=Product.all
-        ActionCable.server.broadcast 'products',html:render_to_string('store/index',layout:false)
+        ActionCable.server.broadcast 'products',html: render_to_string('store/index',layout:false), message: "商品 #{@product.title} 发生了变动#", id: @product.id
       else
         format.html { render :edit }
         format.json { render json: @product.errors, status: :unprocessable_entity }
@@ -65,6 +71,16 @@ class ProductsController < ApplicationController
     end
   end
 
+  def who_bought
+    @product = Product.find(params[:id])
+    @latest_order = @product.orders.order(:updated_at).last
+    if stale?(@latest_order)
+      respond_to do |format|
+        format.atom
+      end
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

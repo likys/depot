@@ -41,7 +41,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     Product.destroy_all
     @product = Product.create! a.as_json(except: ["id"])
     patch product_url(id: @product.id), params: { product: { description: @product.description, image_url: @product.image_url, price: @product.price, title: @product.title } }
-    assert_redirected_to product_url(@product.id)
+    assert_redirected_to products_url(@product.id)
   end
 
   test "should destroy product" do

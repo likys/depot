@@ -7,4 +7,7 @@ App.products=App.cable.subscriptions.create "ProductsChannel",
     disconnected: ->
 
     received: (data) ->
-        $(".store #main").html(data.html)
+            $(".store #main").html(data.html).animate( 1000, () -> 
+                console.log(data.id)
+                $("#product_#{data.id}").css({'background-color':'#88ff88'}).animate({'background-color':'#fff'},1000);
+            )
